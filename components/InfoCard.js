@@ -1,12 +1,14 @@
 import { View, StyleSheet, Text } from "react-native";
-import { COLORS_DARK } from "../constants";
+import { useSelector } from "react-redux";
 
 function InfoCard({ color, caption, number }) {
+  const colors = useSelector((state) => state.theme.colors);
+
   return (
     <View
       style={[
         styles.container,
-        { borderColor: color, backgroundColor: COLORS_DARK.fontInverse },
+        { borderColor: color, backgroundColor: colors.fontInverse },
       ]}
     >
       <Text style={[styles.number, { color: color }]}>{number}</Text>

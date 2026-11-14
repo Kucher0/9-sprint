@@ -1,24 +1,32 @@
 import { View, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 
 import InfoCard from "./InfoCard";
 
 function StatisticsInfo() {
+  const words = useSelector((state) => state.wordsLearning.words);
+  const isDark = useSelector((state) => state.theme.isDark);
+
+  const toLearn = words.filter((item) => item.status === 0).length;
+  const inProcess = words.filter((item) => item.status === 1).length;
+  const learned = words.filter((item) => item.status === 2).length;
+
   return (
     <View style={styles.container}>
       <InfoCard
         caption={"To learn"}
-        number={10}
-        color={true ? "hotpink" : "mediumvioletred"}
+        number={toLearn}
+        color={isDark ? "hotpink" : "mediumvioletred"}
       />
       <InfoCard
         caption={"In process"}
-        number={5}
-        color={true ? "lightgreen" : "green"}
+        number={inProcess}
+        color={isDark ? "lightgreen" : "green"}
       />
       <InfoCard
         caption={"Learned"}
-        number={8}
-        color={true ? "lightblue" : "mediumblue"}
+        number={learned}
+        color={isDark ? "lightblue" : "mediumblue"}
       />
     </View>
   );
